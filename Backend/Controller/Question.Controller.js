@@ -26,16 +26,17 @@ const CreateExam = async (req, res) => {
 
 }
 
-const userQuestion = async (req, res) => { // for user
+const userQuestion = async (req, res) => { // for user 1.point
     try {
         const UserExam = await ExamModel.find({ assignedTo: req.userID }).populate("assignedTo").populate("instructor")
         res.status(201).json(UserExam)
-
 
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
 }
+
+
 
 const AllUsers = async (req, res) => {
     try {
@@ -45,5 +46,30 @@ const AllUsers = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 }
+//-------> User Routes 
+//-------> Recent Exam/previous
 
-module.exports = { CreateExam, userQuestion, AllUsers }
+
+const recent = async (req, res) => {
+    try {
+        const userId = req.userID;
+        const user = await UserModel.findById(userId).populate('clearedExams');
+        res.status(200).json(user.clearedExams);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch recent cleared exams' });
+    }
+}
+
+
+const upcoming = async (req, res) => {
+    try {
+        const userId = req.userID;
+        const user = await UserModel.findById(userId).populate('upcomingExams');
+        const now = new Date();
+        const upcomingExams = user.upcomingExams.filter((exam) => exam.startTime > now);
+        res.status(200).json(upcomingExams);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch upcoming exams' });
+    }
+}
+module.exports = { CreateExam, userQuestion, AllUsers, recent, upcoming }

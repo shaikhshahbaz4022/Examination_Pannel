@@ -9,6 +9,8 @@ const userShema = mongoose.Schema({
         enum: ["admin", "user", "instructor"],
         default: "user"
     },
+    clearedExams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'exam' }],
+    upcomingExams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'exam' }]
 
 
 }, {
