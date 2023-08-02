@@ -12,6 +12,6 @@ const examSchema = new mongoose.Schema({
 
 });
 
-const ExamModel = mongoose.model('Exam', examSchema);
+const ExamModel = mongoose.model('exam', examSchema);
 
 module.exports = ExamModel;
