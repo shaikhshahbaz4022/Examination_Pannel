@@ -36,8 +36,6 @@ const userQuestion = async (req, res) => { // for user 1.point
     }
 }
 
-
-
 const AllUsers = async (req, res) => {
     try {
         const data = await UserModel.find({ role: "user" })
