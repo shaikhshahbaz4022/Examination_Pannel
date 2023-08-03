@@ -26,6 +26,15 @@ const CreateExam = async (req, res) => {
 
 }
 
+const allexamdata = async (req, res) => {
+    try {
+        const data = await ExamModel.find()
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
 const userQuestion = async (req, res) => { // for user 1.point
     try {
         const UserExam = await ExamModel.find({ assignedTo: req.userID }).populate("assignedTo").populate("instructor")
@@ -163,4 +172,4 @@ const checkpaper = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 }
-module.exports = { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper }
+module.exports = { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata }

@@ -15,6 +15,9 @@ app.use("/user", userRouter)
 app.use(auth)
 app.use("/exam", QuestionRouter)
 app.use("/admin", AdminRouter)
+
+const date = new Date()
+console.log("date", date)
 app.listen(PORT, async () => {
     try {
         await connection
