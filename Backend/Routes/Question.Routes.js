@@ -1,8 +1,9 @@
 const express = require('express');
 
-const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned } = require('../Controller/Question.Controller');
+const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper } = require('../Controller/Question.Controller');
 
 const { UserAuthenticate } = require('../Middleware/RBAC');
+const ExamModel = require('../Model/Question.Model');
 const QuestionRouter = express.Router()
 
 QuestionRouter.post("/create", CreateExam)
@@ -25,6 +26,12 @@ QuestionRouter.post('/exams/:examId/submit', submit);
 // Route: POST /exam/exams/:examId/assign/:studentId
 // Assign an exam to a specific user 
 QuestionRouter.post('/exams/:examId/assign/:studentId', assigned)
+
+//instructor will get all papers
+QuestionRouter.get("/seepaper/:id", allpapers)
+
+//instructor can check the papers
+QuestionRouter.patch("/checkpaper/:examID", checkpaper)
 
 
 module.exports = QuestionRouter 
