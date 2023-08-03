@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper } = require('../Controller/Question.Controller');
+const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata } = require('../Controller/Question.Controller');
 
 const { UserAuthenticate } = require('../Middleware/RBAC');
 const ExamModel = require('../Model/Question.Model');
@@ -11,7 +11,7 @@ QuestionRouter.get("/userquestion", userQuestion)
 
 QuestionRouter.get("/allusers", UserAuthenticate(["instructor", "admin"]), AllUsers)
 //users 
-
+QuestionRouter.get("/getallexam", allexamdata)
 //---> previous exam
 QuestionRouter.get("/recent", recent)
 //---->upcoming exams of user

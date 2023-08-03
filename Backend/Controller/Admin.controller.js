@@ -19,7 +19,7 @@ const userInstructor = async (req, res) => {
 }
 const alldata = async (req, res) => {
     try {
-        const alldata = await UserModel.find()
+        const alldata = await UserModel.find().populate("clearedExams")
         res.status(200).json(alldata)
     } catch (error) {
         res.status(500).json({ msg: error.message });
