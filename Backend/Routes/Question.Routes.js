@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { CreateExam, userQuestion, AllUsers, recent, upcoming } = require('../Controller/Question.Controller');
+const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned } = require('../Controller/Question.Controller');
 
 const { UserAuthenticate } = require('../Middleware/RBAC');
 const QuestionRouter = express.Router()
@@ -17,8 +17,13 @@ QuestionRouter.get("/recent", recent)
 QuestionRouter.get("/upcoming", upcoming)
 
 
+// Route: POST /api/exams/:examId/submit
+// Submit an exam by the User and update clearedExams
+QuestionRouter.post('/exams/:examId/submit', submit);
 
-
+// Route: POST /api/exams/:examId/assign/:studentId
+// Assign an exam to a specific user 
+QuestionRouter.post('/exams/:examId/assign/:studentId', assigned)
 
 
 module.exports = QuestionRouter 

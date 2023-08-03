@@ -6,7 +6,6 @@ const userInstructor = async (req, res) => {
     const { name, email, password, role } = req.body
     try {
 
-
         bcrypt.hash(password, 4, async (err, hash) => {
             const user = new UserModel({ name, email, password: hash, role })
             await user.save()
