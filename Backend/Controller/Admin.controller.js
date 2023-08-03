@@ -8,6 +8,7 @@ const userInstructor = async (req, res) => {
 
         bcrypt.hash(password, 4, async (err, hash) => {
             const user = new UserModel({ name, email, password: hash, role })
+            console.log(user);
             await user.save()
             res.status(201).json({ "msg": `${user.role} Created Succesfully` })
 
