@@ -2,7 +2,7 @@ const express = require('express');
 
 const { userInstructor, alldata } = require('../Controller/Admin.controller');
 const { UserAuthenticate } = require('../Middleware/RBAC');
-const UserModel = require('../Model/User.model');
+
 const AdminRouter = express.Router()
 
 AdminRouter.post("/create", UserAuthenticate(["admin"]), userInstructor)
